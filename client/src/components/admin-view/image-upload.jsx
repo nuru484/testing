@@ -1,10 +1,10 @@
-import { FileIcon, UploadCloudIcon, XIcon } from "lucide-react";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
-import { useEffect, useRef } from "react";
-import { Button } from "../ui/button";
-import axios from "axios";
-import { Skeleton } from "../ui/skeleton";
+import { FileIcon, UploadCloudIcon, XIcon } from 'lucide-react';
+import { Input } from '../ui/input';
+import { Label } from '../ui/label';
+import { useEffect, useRef } from 'react';
+import { Button } from '../ui/button';
+import axios from 'axios';
+import { Skeleton } from '../ui/skeleton';
 
 function ProductImageUpload({
   imageFile,
@@ -18,10 +18,10 @@ function ProductImageUpload({
 }) {
   const inputRef = useRef(null);
 
-  console.log(isEditMode, "isEditMode");
+  console.log(isEditMode, 'isEditMode');
 
   function handleImageFileChange(event) {
-    console.log(event.target.files, "event.target.files");
+    console.log(event.target.files, 'event.target.files');
     const selectedFile = event.target.files?.[0];
     console.log(selectedFile);
 
@@ -41,19 +41,19 @@ function ProductImageUpload({
   function handleRemoveImage() {
     setImageFile(null);
     if (inputRef.current) {
-      inputRef.current.value = "";
+      inputRef.current.value = '';
     }
   }
 
   async function uploadImageToCloudinary() {
     setImageLoadingState(true);
     const data = new FormData();
-    data.append("my_file", imageFile);
+    data.append('my_file', imageFile);
     const response = await axios.post(
-      "http://localhost:5000/api/admin/products/upload-image",
+      'https://testing-m7ku.onrender.com/api/admin/products/upload-image',
       data
     );
-    console.log(response, "response");
+    console.log(response, 'response');
 
     if (response?.data?.success) {
       setUploadedImageUrl(response.data.result.url);
@@ -67,14 +67,14 @@ function ProductImageUpload({
 
   return (
     <div
-      className={`w-full  mt-4 ${isCustomStyling ? "" : "max-w-md mx-auto"}`}
+      className={`w-full  mt-4 ${isCustomStyling ? '' : 'max-w-md mx-auto'}`}
     >
       <Label className="text-lg font-semibold mb-2 block">Upload Image</Label>
       <div
         onDragOver={handleDragOver}
         onDrop={handleDrop}
         className={`${
-          isEditMode ? "opacity-60" : ""
+          isEditMode ? 'opacity-60' : ''
         } border-2 border-dashed rounded-lg p-4`}
       >
         <Input
@@ -89,7 +89,7 @@ function ProductImageUpload({
           <Label
             htmlFor="image-upload"
             className={`${
-              isEditMode ? "cursor-not-allowed" : ""
+              isEditMode ? 'cursor-not-allowed' : ''
             } flex flex-col items-center justify-center h-32 cursor-pointer`}
           >
             <UploadCloudIcon className="w-10 h-10 text-muted-foreground mb-2" />

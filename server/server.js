@@ -19,7 +19,9 @@ const commonFeatureRouter = require('./routes/common/feature-routes');
 //create a separate file for this and then import/use that file here
 
 mongoose
-  .connect('mongodb://localhost:27017/ecomerce')
+  .connect(
+    'mongodb+srv://nuru:0553997465@myatlasclusteredu.wxoahpc.mongodb.net/?retryWrites=true&w=majority&appName=myAtlasClusterEDU'
+  )
   .then(() => console.log('MongoDB connected'))
   .catch((error) => console.log(error));
 
