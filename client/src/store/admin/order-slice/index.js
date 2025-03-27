@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const initialState = {
   orderList: [],
@@ -7,10 +7,10 @@ const initialState = {
 };
 
 export const getAllOrdersForAdmin = createAsyncThunk(
-  "/order/getAllOrdersForAdmin",
+  '/order/getAllOrdersForAdmin',
   async () => {
     const response = await axios.get(
-      `http://localhost:5000/api/admin/orders/get`
+      `https://testing-m7ku.onrender.com/api/admin/orders/get`
     );
 
     return response.data;
@@ -18,10 +18,10 @@ export const getAllOrdersForAdmin = createAsyncThunk(
 );
 
 export const getOrderDetailsForAdmin = createAsyncThunk(
-  "/order/getOrderDetailsForAdmin",
+  '/order/getOrderDetailsForAdmin',
   async (id) => {
     const response = await axios.get(
-      `http://localhost:5000/api/admin/orders/details/${id}`
+      `https://testing-m7ku.onrender.com/api/admin/orders/details/${id}`
     );
 
     return response.data;
@@ -29,10 +29,10 @@ export const getOrderDetailsForAdmin = createAsyncThunk(
 );
 
 export const updateOrderStatus = createAsyncThunk(
-  "/order/updateOrderStatus",
+  '/order/updateOrderStatus',
   async ({ id, orderStatus }) => {
     const response = await axios.put(
-      `http://localhost:5000/api/admin/orders/update/${id}`,
+      `https://testing-m7ku.onrender.com/api/admin/orders/update/${id}`,
       {
         orderStatus,
       }
@@ -43,11 +43,11 @@ export const updateOrderStatus = createAsyncThunk(
 );
 
 const adminOrderSlice = createSlice({
-  name: "adminOrderSlice",
+  name: 'adminOrderSlice',
   initialState,
   reducers: {
     resetOrderDetails: (state) => {
-      console.log("resetOrderDetails");
+      console.log('resetOrderDetails');
 
       state.orderDetails = null;
     },

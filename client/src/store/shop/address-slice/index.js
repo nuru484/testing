@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const initialState = {
   isLoading: false,
@@ -7,10 +7,10 @@ const initialState = {
 };
 
 export const addNewAddress = createAsyncThunk(
-  "/addresses/addNewAddress",
+  '/addresses/addNewAddress',
   async (formData) => {
     const response = await axios.post(
-      "http://localhost:5000/api/shop/address/add",
+      'https://testing-m7ku.onrender.com/api/shop/address/add',
       formData
     );
 
@@ -19,10 +19,10 @@ export const addNewAddress = createAsyncThunk(
 );
 
 export const fetchAllAddresses = createAsyncThunk(
-  "/addresses/fetchAllAddresses",
+  '/addresses/fetchAllAddresses',
   async (userId) => {
     const response = await axios.get(
-      `http://localhost:5000/api/shop/address/get/${userId}`
+      `https://testing-m7ku.onrender.com/api/shop/address/get/${userId}`
     );
 
     return response.data;
@@ -30,10 +30,10 @@ export const fetchAllAddresses = createAsyncThunk(
 );
 
 export const editaAddress = createAsyncThunk(
-  "/addresses/editaAddress",
+  '/addresses/editaAddress',
   async ({ userId, addressId, formData }) => {
     const response = await axios.put(
-      `http://localhost:5000/api/shop/address/update/${userId}/${addressId}`,
+      `https://testing-m7ku.onrender.com/api/shop/address/update/${userId}/${addressId}`,
       formData
     );
 
@@ -42,10 +42,10 @@ export const editaAddress = createAsyncThunk(
 );
 
 export const deleteAddress = createAsyncThunk(
-  "/addresses/deleteAddress",
+  '/addresses/deleteAddress',
   async ({ userId, addressId }) => {
     const response = await axios.delete(
-      `http://localhost:5000/api/shop/address/delete/${userId}/${addressId}`
+      `https://testing-m7ku.onrender.com/api/shop/address/delete/${userId}/${addressId}`
     );
 
     return response.data;
@@ -53,7 +53,7 @@ export const deleteAddress = createAsyncThunk(
 );
 
 const addressSlice = createSlice({
-  name: "address",
+  name: 'address',
   initialState,
   reducers: {},
   extraReducers: (builder) => {

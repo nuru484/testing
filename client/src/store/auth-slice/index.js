@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const initialState = {
   isAuthenticated: false,
@@ -8,11 +8,11 @@ const initialState = {
 };
 
 export const registerUser = createAsyncThunk(
-  "/auth/register",
+  '/auth/register',
 
   async (formData) => {
     const response = await axios.post(
-      "http://localhost:5000/api/auth/register",
+      'https://testing-m7ku.onrender.com/api/auth/register',
       formData,
       {
         withCredentials: true,
@@ -24,11 +24,11 @@ export const registerUser = createAsyncThunk(
 );
 
 export const loginUser = createAsyncThunk(
-  "/auth/login",
+  '/auth/login',
 
   async (formData) => {
     const response = await axios.post(
-      "http://localhost:5000/api/auth/login",
+      'https://testing-m7ku.onrender.com/api/auth/login',
       formData,
       {
         withCredentials: true,
@@ -40,11 +40,11 @@ export const loginUser = createAsyncThunk(
 );
 
 export const logoutUser = createAsyncThunk(
-  "/auth/logout",
+  '/auth/logout',
 
   async () => {
     const response = await axios.post(
-      "http://localhost:5000/api/auth/logout",
+      'https://testing-m7ku.onrender.com/api/auth/logout',
       {},
       {
         withCredentials: true,
@@ -56,16 +56,16 @@ export const logoutUser = createAsyncThunk(
 );
 
 export const checkAuth = createAsyncThunk(
-  "/auth/checkauth",
+  '/auth/checkauth',
 
   async () => {
     const response = await axios.get(
-      "http://localhost:5000/api/auth/check-auth",
+      'https://testing-m7ku.onrender.com/api/auth/check-auth',
       {
         withCredentials: true,
         headers: {
-          "Cache-Control":
-            "no-store, no-cache, must-revalidate, proxy-revalidate",
+          'Cache-Control':
+            'no-store, no-cache, must-revalidate, proxy-revalidate',
         },
       }
     );
@@ -75,7 +75,7 @@ export const checkAuth = createAsyncThunk(
 );
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     setUser: (state, action) => {},

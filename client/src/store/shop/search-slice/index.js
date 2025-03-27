@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const initialState = {
   isLoading: false,
@@ -7,10 +7,10 @@ const initialState = {
 };
 
 export const getSearchResults = createAsyncThunk(
-  "/order/getSearchResults",
+  '/order/getSearchResults',
   async (keyword) => {
     const response = await axios.get(
-      `http://localhost:5000/api/shop/search/${keyword}`
+      `https://testing-m7ku.onrender.com/api/shop/search/${keyword}`
     );
 
     return response.data;
@@ -18,7 +18,7 @@ export const getSearchResults = createAsyncThunk(
 );
 
 const searchSlice = createSlice({
-  name: "searchSlice",
+  name: 'searchSlice',
   initialState,
   reducers: {
     resetSearchResults: (state) => {

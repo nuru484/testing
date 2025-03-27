@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const initialState = {
   isLoading: false,
@@ -7,14 +7,14 @@ const initialState = {
 };
 
 export const addNewProduct = createAsyncThunk(
-  "/products/addnewproduct",
+  '/products/addnewproduct',
   async (formData) => {
     const result = await axios.post(
-      "http://localhost:5000/api/admin/products/add",
+      'https://testing-m7ku.onrender.com/api/admin/products/add',
       formData,
       {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       }
     );
@@ -24,10 +24,10 @@ export const addNewProduct = createAsyncThunk(
 );
 
 export const fetchAllProducts = createAsyncThunk(
-  "/products/fetchAllProducts",
+  '/products/fetchAllProducts',
   async () => {
     const result = await axios.get(
-      "http://localhost:5000/api/admin/products/get"
+      'https://testing-m7ku.onrender.com/api/admin/products/get'
     );
 
     return result?.data;
@@ -35,14 +35,14 @@ export const fetchAllProducts = createAsyncThunk(
 );
 
 export const editProduct = createAsyncThunk(
-  "/products/editProduct",
+  '/products/editProduct',
   async ({ id, formData }) => {
     const result = await axios.put(
-      `http://localhost:5000/api/admin/products/edit/${id}`,
+      `https://testing-m7ku.onrender.com/api/admin/products/edit/${id}`,
       formData,
       {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       }
     );
@@ -52,10 +52,10 @@ export const editProduct = createAsyncThunk(
 );
 
 export const deleteProduct = createAsyncThunk(
-  "/products/deleteProduct",
+  '/products/deleteProduct',
   async (id) => {
     const result = await axios.delete(
-      `http://localhost:5000/api/admin/products/delete/${id}`
+      `https://testing-m7ku.onrender.com/api/admin/products/delete/${id}`
     );
 
     return result?.data;
@@ -63,7 +63,7 @@ export const deleteProduct = createAsyncThunk(
 );
 
 const AdminProductsSlice = createSlice({
-  name: "adminProducts",
+  name: 'adminProducts',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
