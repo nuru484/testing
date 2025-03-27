@@ -33,7 +33,14 @@ function App() {
     dispatch(checkAuth());
   }, [dispatch]);
 
-  if (isLoading) return <Skeleton className="w-[800] bg-black h-[600px]" />;
+  // Use a more robust loading state
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Skeleton className="w-[800px] bg-gray-200 h-[600px]" />
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col overflow-hidden bg-white">
@@ -44,13 +51,18 @@ function App() {
             <CheckAuth
               isAuthenticated={isAuthenticated}
               user={user}
+              isLoading={isLoading}
             ></CheckAuth>
           }
         />
         <Route
           path="/auth"
           element={
-            <CheckAuth isAuthenticated={isAuthenticated} user={user}>
+            <CheckAuth
+              isAuthenticated={isAuthenticated}
+              user={user}
+              isLoading={isLoading}
+            >
               <AuthLayout />
             </CheckAuth>
           }
@@ -61,7 +73,11 @@ function App() {
         <Route
           path="/admin"
           element={
-            <CheckAuth isAuthenticated={isAuthenticated} user={user}>
+            <CheckAuth
+              isAuthenticated={isAuthenticated}
+              user={user}
+              isLoading={isLoading}
+            >
               <AdminLayout />
             </CheckAuth>
           }
@@ -74,7 +90,11 @@ function App() {
         <Route
           path="/shop"
           element={
-            <CheckAuth isAuthenticated={isAuthenticated} user={user}>
+            <CheckAuth
+              isAuthenticated={isAuthenticated}
+              user={user}
+              isLoading={isLoading}
+            >
               <ShoppingLayout />
             </CheckAuth>
           }

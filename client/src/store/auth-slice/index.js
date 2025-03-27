@@ -9,7 +9,6 @@ const initialState = {
 
 export const registerUser = createAsyncThunk(
   '/auth/register',
-
   async (formData) => {
     const response = await axios.post(
       'https://testing-m7ku.onrender.com/api/auth/register',
@@ -23,56 +22,44 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-export const loginUser = createAsyncThunk(
-  '/auth/login',
+export const loginUser = createAsyncThunk('/auth/login', async (formData) => {
+  const response = await axios.post(
+    'https://testing-m7ku.onrender.com/api/auth/login',
+    formData,
+    {
+      withCredentials: true,
+    }
+  );
 
-  async (formData) => {
-    const response = await axios.post(
-      'https://testing-m7ku.onrender.com/api/auth/login',
-      formData,
-      {
-        withCredentials: true,
-      }
-    );
+  return response.data;
+});
 
-    return response.data;
-  }
-);
+export const logoutUser = createAsyncThunk('/auth/logout', async () => {
+  const response = await axios.post(
+    'https://testing-m7ku.onrender.com/api/auth/logout',
+    {},
+    {
+      withCredentials: true,
+    }
+  );
 
-export const logoutUser = createAsyncThunk(
-  '/auth/logout',
+  return response.data;
+});
 
-  async () => {
-    const response = await axios.post(
-      'https://testing-m7ku.onrender.com/api/auth/logout',
-      {},
-      {
-        withCredentials: true,
-      }
-    );
+export const checkAuth = createAsyncThunk('/auth/checkauth', async () => {
+  const response = await axios.get(
+    'https://testing-m7ku.onrender.com/api/auth/check-auth',
+    {
+      withCredentials: true,
+      headers: {
+        'Cache-Control':
+          'no-store, no-cache, must-revalidate, proxy-revalidate',
+      },
+    }
+  );
 
-    return response.data;
-  }
-);
-
-export const checkAuth = createAsyncThunk(
-  '/auth/checkauth',
-
-  async () => {
-    const response = await axios.get(
-      'https://testing-m7ku.onrender.com/api/auth/check-auth',
-      {
-        withCredentials: true,
-        headers: {
-          'Cache-Control':
-            'no-store, no-cache, must-revalidate, proxy-revalidate',
-        },
-      }
-    );
-
-    return response.data;
-  }
-);
+  return response.data;
+});
 
 const authSlice = createSlice({
   name: 'auth',
@@ -99,8 +86,6 @@ const authSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        console.log(action);
-
         state.isLoading = false;
         state.user = action.payload.success ? action.payload.user : null;
         state.isAuthenticated = action.payload.success;
@@ -122,6 +107,8 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.user = null;
         state.isAuthenticated = false;
+        // Optionally log the error
+        console.error('Authentication check failed', action.error);
       })
       .addCase(logoutUser.fulfilled, (state, action) => {
         state.isLoading = false;

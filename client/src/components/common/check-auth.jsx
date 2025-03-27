@@ -1,9 +1,12 @@
 import { Navigate, useLocation } from 'react-router-dom';
 
-function CheckAuth({ isAuthenticated, user, children }) {
+function CheckAuth({ isAuthenticated, user, isLoading, children }) {
   const location = useLocation();
 
-  console.log(location.pathname, isAuthenticated);
+  // If still loading, return null or a loading indicator
+  if (isLoading) {
+    return null; // or you could return a loading spinner here
+  }
 
   if (location.pathname === '/') {
     if (!isAuthenticated) {
